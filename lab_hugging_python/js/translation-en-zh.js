@@ -1,0 +1,1 @@
+import{createApiLab,textResult}from'./api-runtime.js?v=2026083001';const x=document.querySelector('#text');createApiLab({endpoint:'translate-en-zh',read:()=>{const text=x.value.trim();if(!text||text.length>2500)throw Error('請輸入 1–2500 字英文文字。');return{text}},render:(d,n)=>textResult(d[0]?.translation_text||'模型未回傳翻譯。',n)});

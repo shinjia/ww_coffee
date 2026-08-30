@@ -1,0 +1,7 @@
+{
+  "host": "127.0.0.1",
+  "port": 5000,
+  "debug": false,
+  "allowed_origins": ["http://localhost", "http://127.0.0.1"],
+  "model_cache_dir": "storage/models"
+}

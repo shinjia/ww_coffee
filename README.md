@@ -21,6 +21,7 @@
 - 對外客戶意見表單，以及登入後的留言處理介面
 - 共用員工登入、人事名冊與管理者新增員工功能
 - `lab_hugging` 十二種獨立 Browser AI 文字教學實驗
+- `lab_hugging_python` 十二種獨立 Python Server AI 文字教學實驗
 
 訂閱功能目前為前端示意，不會傳送或儲存 Email；後端服務接妥前會清楚告知使用者。
 
@@ -60,6 +61,12 @@ ww_coffee/
 │  ├─ css/style.css
 │  ├─ js/runtime.js 與各實驗專用 JS
 │  └─ hugging.md
+├─ lab_hugging_python/            # 獨立 Python Server AI 實驗室
+│  ├─ 入口與 12 個任務 HTML
+│  ├─ css/、js/
+│  ├─ api/app.py、model_manager.py、requirements.txt
+│  ├─ api/tasks/                  # 12 個任務專用 Python 模組
+│  └─ hugging_python.md
 ├─ README.md
 ├─ AGENTS.md
 ├─ HANDOFF.md
@@ -97,6 +104,12 @@ MIS 共用 CSS／JS 與留言 JS 目前使用 `?v=2026083001`；各檔案分別�
 開啟 `http://localhost/ww_coffee/lab_hugging/`，再進入十二個獨立 Browser AI 文字實驗。新增的 Sentence Similarity 會比較兩個 Embedding 的 cosine similarity；Feature Extraction / Embedding 會顯示 384 維向量摘要與完整 JSON。首次載入各模型需要網路並下載 ONNX 模型；後續通常會使用 Browser Cache。詳細模型、來源及測試紀錄請參閱 `lab_hugging/hugging.md`。
 
 Lab CSS 為 `?v=2026083003`，共用與各實驗 JS 為 `?v=2026083001`。
+
+## Python Server AI 實驗室
+
+開啟 `http://localhost/ww_coffee/lab_hugging_python/`。此目錄不取代原 Browser AI；前端透過 `fetch()` 呼叫 `http://127.0.0.1:5000/api/v1`，模型首次呼叫時載入並留在 Python Process 重用。建議另裝 Python 3.11，再依 `lab_hugging_python/hugging_python.md` 建立虛擬環境、安裝固定版本套件並啟動 Flask API。
+
+Python Lab CSS、共用 API JS 與各任務 JS 初版均為 `?v=2026083001`。
 
 ## 圖片來源
 

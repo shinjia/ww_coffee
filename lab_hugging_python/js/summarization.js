@@ -1,0 +1,1 @@
+import{createApiLab,textResult}from'./api-runtime.js?v=2026083001';const x=document.querySelector('#text');createApiLab({endpoint:'summarize',read:()=>{const text=x.value.trim();if(!text||text.length>6000)throw Error('請輸入 1–6000 字英文長文。');return{text}},render:(d,n)=>textResult(d[0]?.summary_text||'模型未回傳摘要。',n)});

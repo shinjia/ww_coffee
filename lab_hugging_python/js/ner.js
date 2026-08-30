@@ -1,0 +1,1 @@
+import{createApiLab,listResult}from'./api-runtime.js?v=2026083001';const x=document.querySelector('#text');createApiLab({endpoint:'ner',read:()=>{const text=x.value.trim();if(!text||text.length>2000)throw Error('請輸入 1–2000 字英文文字。');return{text}},render:(d,n)=>listResult(d.length?d.map(x=>`${x.word} → ${x.entity_group} ${(x.score*100).toFixed(1)}%`):['未辨識到實體。'],n)});

@@ -1,0 +1,5 @@
+.venv/
+api/storage/models/
+api/__pycache__/
+api/tasks/__pycache__/
+api/tests/__pycache__/

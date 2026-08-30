@@ -57,3 +57,12 @@
 - 每一種 Pipeline 必須使用獨立 HTML 與專用 JS；`index.html` 只作入口，不得把多種應用混在同一個實驗頁。
 - 允許 `runtime.js` 共用模型載入與狀態處理，但各任務的欄位、參數與結果轉換必須留在該任務專用 JS。
 - Sentence Similarity 必須以模型產生的 Embedding 計算 cosine similarity；Feature Extraction 必須呈現真實向量維度與數值，不得以固定分數或範例向量代替。
+
+## Python Server AI Lab 規範
+
+- `lab_hugging` Browser AI 必須完整保留；Server AI 只在獨立的 `lab_hugging_python` 開發。
+- 每個任務需有獨立 HTML、JS 與 `api/tasks` Python 模組；共用 API 狀態放在 `api-runtime.js`，模型生命週期放在 `model_manager.py`。
+- 模型採首次請求載入、後續常駐重用；不得每次請求重新建立 Pipeline，也不得一次無條件預載全部模型。
+- Python 套件必須固定版本並使用專用虛擬環境；模型與套件來源、用途及測試狀態記錄於 `hugging_python.md`。
+- API 必須在後端再次驗證型別、空值、長度與允許範圍，限制 Body、Origin，不回傳 traceback、內部路徑或敏感資訊。
+- 前端必須顯示連線／模型載入等待、完成與錯誤狀態；API 回傳模型是否快取及載入、推論、總耗時。

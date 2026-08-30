@@ -10,7 +10,8 @@
 - 目前無外部 CDN、API 或第三方套件。
 - 已建立 `mis_shared` 共用核心、`mis_hr` 人事管理及 `mis_feedback` 客戶意見留言子系統。
 - 已建立 `lab_hugging` 入口與十二個各自獨立的 Browser AI 文字實驗，包含 Sentence Similarity 與 Feature Extraction / Embedding。
-- 已建立 `CHANGELOG.md`，目前網站版本為 `0.6.0`。
+- 已建立獨立 `lab_hugging_python`，包含 12 個 Server AI 頁面、專用 JS、Flask API、模型管理器及 12 個 Python 任務模組；原 `lab_hugging` 未修改。
+- 已建立 `CHANGELOG.md`，目前網站版本為 `0.7.0`。
 
 ## 重要決策
 
@@ -26,6 +27,7 @@
 - Lab 每種 Pipeline 使用獨立 HTML 與專用 JS，僅共用 `runtime.js` 的下載、進度與錯誤處理。
 - Sentence Similarity 與 Feature Extraction 共用 `Xenova/all-MiniLM-L6-v2`；前者計算兩個正規化 Embedding 的 cosine similarity，後者呈現 384 維向量。
 - 根目錄入口列出品牌官網、客戶留言、AI Lab、員工登入、人事管理及客戶意見管理，並區分對外／內部／實驗。
+- Python Lab 採 Lazy Load + Process 記憶體快取；API 回傳 `load_ms`、`inference_ms`、`total_ms` 與 `model_cached`。
 
 ## 已知問題
 
@@ -36,6 +38,7 @@
 - 尚未實作初次登入強制改密碼、忘記密碼、員工編輯／停用、留言搜尋／分頁／通知及資料保存期限清理。
 - 正式部署前必須設定公司內網／VPN 存取限制、移除開發預設密碼並完成隱私權政策。
 - 多語模型、WebGPU、Chrome、Edge、Safari 與手機實機尚待完整驗證。
+- 已建立 Python 3.11.9 的 `.venv`，但 Flask、Transformers、PyTorch 等套件尚未安裝；API 測試與真實模型推論尚待執行。
 
 ## 已完成檢查
 
@@ -56,6 +59,7 @@
 - `all-MiniLM-L6-v2` q8 真實推論成功：相近句 cosine similarity 為 0.8097，Embedding 為 384 維且 L2 norm 為 1.000000。
 - 根入口與六個清單連結均可存取；品牌 CSS、JS、WebP 皆回傳 200，舊 `/assets/` 路徑回傳 404。
 - 系統入口在 390px 寬度無橫向溢出，六張卡片完整且 Console 無錯誤。
+- Python Lab 入口與 12 個任務頁皆回傳 HTTP 200，390px 無橫向溢出；API 未啟動時前端能顯示明確錯誤，404 測試正常。
 
 ## 下一步
 
@@ -67,6 +71,7 @@
 
 ## 修改紀錄
 
+- 2026-08-31：新增獨立 Python Server AI 實驗室，保留原有 Transformers.js 全部功能。
 - 2026-08-30：新增 Sentence Similarity 與 Feature Extraction / Embedding，文字 AI 實驗室擴充為十二類。
 - 2026-08-30：品牌前台移至 `web/`，根首頁改為各子系統清單入口。
 - 2026-08-30：將每種 Browser AI 應用拆成獨立 HTML 與專用 JS，完成十個實驗入口與頁面。

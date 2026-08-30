@@ -2,6 +2,26 @@
 
 本文件記錄木窗咖啡 WW Coffee 對外網站的重要變更。日期採 `YYYY-MM-DD`，版本依語意化版本格式記錄。
 
+## [0.7.0] - 2026-08-31
+
+### 新增
+
+- 新增獨立 `lab_hugging_python`，包含 12 個任務頁、12 個專用 JS 與 12 個專用 Python 任務模組。
+- 新增 Flask JSON API、統一前端 API Runtime、模型 Lazy Load／記憶體快取、每模型 Lock 與效能時間回傳。
+- 新增 Python 套件鎖定、設定、Git 忽略、API Mock 測試與 `hugging_python.md`。
+- 根系統入口新增 Python Server AI 實驗室卡片。
+
+### 保留
+
+- 原 `lab_hugging` Transformers.js Browser AI 的 12 個實驗與資產未修改。
+
+### 驗證
+
+- 12 個 HTML、13 個 JS（含共用 Runtime）、12 個 Python 任務模組一一對應。
+- Python 檔案通過現有 Python 3.8.5 語法編譯；真實套件與模型需在 Python 3.11 虛擬環境安裝後驗證。
+- 入口與 12 個任務頁 HTTP 200、390px 無橫向溢出，API 離線錯誤狀態與 404 處理正常。
+- 已確認 Python 3.11.9 虛擬環境存在；套件尚未安裝，API 單元測試目前因缺少 Flask 無法執行。
+
 ## [0.6.0] - 2026-08-30
 
 ### 新增

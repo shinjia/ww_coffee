@@ -1,0 +1,2 @@
+from . import embedding,fill_mask,generation,ner,qa,sentiment,similarity,summarization,text2text,translation_en_zh,translation_zh_en,zero_shot
+TASKS={"sentiment":sentiment.run,"zero-shot":zero_shot.run,"ner":ner.run,"qa":qa.run,"summarize":summarization.run,"generate":generation.run,"translate-en-zh":translation_en_zh.run,"translate-zh-en":translation_zh_en.run,"fill-mask":fill_mask.run,"text2text":text2text.run,"similarity":similarity.run,"embedding":embedding.run}
