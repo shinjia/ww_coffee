@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="在瀏覽器中使用 Hugging Face Transformers.js 學習文字情緒分析。">
+  <meta name="theme-color" content="#f4efe5">
+  <title>文字 AI 實驗室｜木窗咖啡</title>
+  <link rel="stylesheet" href="css/style.css?v=2026083003">
+</head>
+<body>
+  <a class="skip-link" href="#experiment">跳至實驗區</a>
+  <header class="site-header">
+    <a class="brand" href="../web/"><span class="brand-mark">WW</span><span><strong>文字 AI 實驗室</strong><small>WOOD WINDOW · BROWSER AI</small></span></a>
+    <nav aria-label="頁面導覽"><a href="#concept">運作方式</a><a href="#experiment">情緒分析</a><a href="#samples">測試案例</a><a href="#observe">觀察重點</a></nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">LAB 01 · SENTIMENT ANALYSIS</p>
+        <h1>讓模型讀一句話，<br>它感受到什麼？</h1>
+        <p>模型直接下載到你的瀏覽器執行，不需 API Key，也不會把輸入內容送到木窗咖啡的伺服器。</p>
+        <a class="primary-link" href="#experiment">開始實驗 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-diagram" aria-label="Browser AI 執行流程">
+        <span>你的文字</span><i aria-hidden="true">→</i><span>Tokenizer</span><i aria-hidden="true">→</i><span>Model</span><i aria-hidden="true">→</i><span>結果</span>
+        <strong>全部在 Browser 內完成</strong>
+      </div>
+    </section>
+
+    <section class="concept section" id="concept">
+      <div><p class="eyebrow">HOW IT WORKS</p><h2>Pipeline 是任務，<br>Model 才是判斷者。</h2></div>
+      <div class="concept-grid">
+        <article><span>01</span><h3>Pipeline</h3><code>sentiment-analysis</code><p>定義輸入文字、輸出分類結果的任務介面。</p></article>
+        <article><span>02</span><h3>Model</h3><code>model_id</code><p>真正執行推論的模型；換模型，答案可能跟著改變。</p></article>
+        <article><span>03</span><h3>Local inference</h3><code>WASM / WebGPU</code><p>運算在使用者裝置完成，首次使用需下載模型。</p></article>
+      </div>
+    </section>
+
+    <section class="experiment section" id="experiment" aria-labelledby="experiment-title">
+      <header class="section-head">
+        <div><p class="eyebrow">TRY IT YOURSELF</p><h2 id="experiment-title">情緒分析實驗</h2></div>
+        <p>Task / Pipeline：<code>sentiment-analysis</code></p>
+      </header>
+
+      <div class="lab-layout">
+        <section class="control-panel" aria-labelledby="settings-title">
+          <h3 id="settings-title">1. 選擇模型</h3>
+          <label class="field">模型
+            <select id="model-select">
+              <option value="Xenova/bert-base-multilingual-uncased-sentiment">多語言五星評價模型（推薦）</option>
+              <option value="Xenova/distilbert-base-uncased-finetuned-sst-2-english">英文正負情緒模型</option>
+            </select>
+          </label>
+          <div class="model-card" id="model-card" aria-live="polite"></div>
+          <label class="field">執行方式
+            <select id="device-select"><option value="wasm">WASM（相容性較高）</option><option value="webgpu">WebGPU（實驗性）</option></select>
+          </label>
+          <button class="button button-secondary" id="load-button" type="button">載入模型</button>
+
+          <div class="load-status" id="load-status" role="status" aria-live="polite">
+            <div class="status-line"><span id="status-text">尚未載入模型</span><strong id="progress-text">0%</strong></div>
+            <progress id="progress" max="100" value="0">0%</progress>
+            <small id="file-status">選擇模型後按「載入模型」。首次下載可能需要一些時間。</small>
+          </div>
+
+          <h3>2. 輸入文字</h3>
+          <label class="field" for="input-text">顧客留言</label>
+          <textarea id="input-text" maxlength="500" placeholder="例如：咖啡很好喝，但是等了半個小時。"></textarea>
+          <div class="input-meta"><span id="char-count">0 / 500</span><span>文字只在你的裝置處理</span></div>
+          <button class="button button-primary" id="run-button" type="button" disabled>執行 AI 分析</button>
+          <p class="action-status" id="action-status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="result-panel" aria-labelledby="result-title">
+          <h3 id="result-title">3. 分析結果</h3>
+          <div class="result-empty" id="result-empty"><span>AI</span><p>載入模型並執行後，結果會顯示在這裡。</p></div>
+          <div class="result-content" id="result-content" hidden>
+            <div class="result-hero"><span>模型判斷</span><strong id="result-label">—</strong><small id="result-score">—</small></div>
+            <div class="score-list" id="score-list"></div>
+            <details open><summary>模型原始輸出 Raw JSON</summary><pre id="raw-output"></pre></details>
+            <p class="result-note">信心度代表模型對自身分類的把握，不等同答案一定正確。</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="samples section" id="samples" aria-labelledby="samples-title">
+      <header class="section-head"><div><p class="eyebrow">TEST CASES</p><h2 id="samples-title">換一句話，再觀察一次。</h2></div><p>點選案例會帶入實驗區，不會自動執行。</p></header>
+      <div class="sample-groups" id="sample-groups"></div>
+    </section>
+
+    <section class="observe section" id="observe">
+      <div><p class="eyebrow">OBSERVE & DISCUSS</p><h2>模型有答案，<br>不代表答案可靠。</h2></div>
+      <ol>
+        <li>英文模型處理中文時，仍有輸出是否代表它理解中文？</li>
+        <li>同一句混合正負訊息的留言，模型會偏向哪一邊？</li>
+        <li>五星模型與正負模型的分類尺度有什麼差別？</li>
+        <li>換一個字、標點或語序，信心度會改變多少？</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer><p>木窗咖啡 WW Coffee · Browser AI Learning Lab</p><p>Transformers.js 3.8.1 · 無 API Key</p></footer>
+  <script type="module" src="js/sentiment.js?v=2026083001"></script>
+</body>
+</html>

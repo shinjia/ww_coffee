@@ -1,0 +1,1 @@
+import{createTextLab,textResult}from'./runtime.js?v=2026083001';const input=document.querySelector('#text');createTextLab({task:'summarization',model:'Xenova/distilbart-cnn-6-6',read:()=>input.value.trim(),infer:(p,i)=>p(i,{max_new_tokens:80}),render:(o,n)=>textResult(o[0].summary_text,n),sample:s=>input.value=s.text});

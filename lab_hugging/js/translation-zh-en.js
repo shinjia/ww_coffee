@@ -1,0 +1,1 @@
+import{createTextLab,textResult}from'./runtime.js?v=2026083001';const input=document.querySelector('#text');createTextLab({task:'translation',model:'Xenova/opus-mt-zh-en',read:()=>input.value.trim(),infer:(p,i)=>p(i,{max_new_tokens:128}),render:(o,n)=>textResult(o[0].translation_text,n),sample:s=>input.value=s.text});

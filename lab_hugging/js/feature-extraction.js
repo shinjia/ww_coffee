@@ -1,0 +1,4 @@
+import{createTextLab,textResult}from'./runtime.js?v=2026083001';
+const input=document.querySelector('#input-text');
+function vector(value){let data=typeof value?.tolist==='function'?value.tolist():value;while(Array.isArray(data)&&data.length===1&&Array.isArray(data[0]))data=data[0];if(!Array.isArray(data)||!data.length||!data.every(Number.isFinite))throw new Error('模型未回傳可辨識的向量。');return data}
+createTextLab({task:'feature-extraction',model:'Xenova/all-MiniLM-L6-v2',read:()=>{const text=input.value.trim();if(!text)throw new Error('請輸入要轉換的文字。');if(text.length>1200)throw new Error('輸入文字不可超過 1200 字。');return text},infer:async(p,text)=>({embedding:vector(await p(text,{pooling:'mean',normalize:true}))}),render:(o,n)=>{const norm=Math.sqrt(o.embedding.reduce((sum,value)=>sum+value*value,0));textResult(`向量維度：${o.embedding.length}\nL2 norm：${norm.toFixed(6)}\n前 16 維：\n${o.embedding.slice(0,16).map(value=>value.toFixed(6)).join(', ')}`,n)},sample:s=>{input.value=s}});

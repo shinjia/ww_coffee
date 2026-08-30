@@ -1,0 +1,8 @@
+{
+  "app_name": "木窗咖啡資訊系統",
+  "environment": "development",
+  "base_path": "/ww_coffee",
+  "timezone": "Asia/Taipei",
+  "session_timeout": 1800,
+  "feedback_rate_limit_seconds": 30
+}

@@ -1,0 +1,1 @@
+import{createTextLab,listResult}from'./runtime.js?v=2026083001';const input=document.querySelector('#text');createTextLab({task:'token-classification',model:'Xenova/bert-base-NER',read:()=>input.value.trim(),infer:(p,i)=>p(i,{ignore_labels:[]}),render:(o,n)=>listResult(o.map(x=>`${x.word}　→　${x.entity}　${(x.score*100).toFixed(1)}%`),n),sample:s=>input.value=s.text});
