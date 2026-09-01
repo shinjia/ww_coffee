@@ -11,7 +11,8 @@
 - 已建立 `mis_shared` 共用核心、`mis_hr` 人事管理及 `mis_feedback` 客戶意見留言子系統。
 - 已建立 `lab_hugging` 入口與十二個各自獨立的 Browser AI 文字實驗，包含 Sentence Similarity 與 Feature Extraction / Embedding。
 - 已建立獨立 `lab_hugging_python`，包含 12 個 Server AI 頁面、專用 JS、Flask API、模型管理器及 12 個 Python 任務模組；原 `lab_hugging` 未修改。
-- 已建立 `CHANGELOG.md`，目前網站版本為 `0.7.0`。
+- 根目錄入口已依「網站對外」、「內部管理」、「Lab 實驗」整理為三個明顯區段。
+- 已建立 `CHANGELOG.md`，目前網站版本為 `0.7.1`。
 
 ## 重要決策
 
@@ -26,7 +27,7 @@
 - Browser AI 固定使用 Transformers.js 3.8.1；外部來源為 jsDelivr 與 Hugging Face Hub，不使用 API Key。
 - Lab 每種 Pipeline 使用獨立 HTML 與專用 JS，僅共用 `runtime.js` 的下載、進度與錯誤處理。
 - Sentence Similarity 與 Feature Extraction 共用 `Xenova/all-MiniLM-L6-v2`；前者計算兩個正規化 Embedding 的 cosine similarity，後者呈現 384 維向量。
-- 根目錄入口列出品牌官網、客戶留言、AI Lab、員工登入、人事管理及客戶意見管理，並區分對外／內部／實驗。
+- 根目錄入口列出品牌官網、客戶留言、AI Lab、員工登入、人事管理及客戶意見管理，並以三個獨立區段區分網站對外／內部管理／Lab 實驗。
 - Python Lab 採 Lazy Load + Process 記憶體快取；API 回傳 `load_ms`、`inference_ms`、`total_ms` 與 `model_cached`。
 
 ## 已知問題
@@ -71,6 +72,7 @@
 
 ## 修改紀錄
 
+- 2026-09-02：根目錄入口改為網站對外、內部管理與 Lab 實驗三個清楚區段。
 - 2026-08-31：新增獨立 Python Server AI 實驗室，保留原有 Transformers.js 全部功能。
 - 2026-08-30：新增 Sentence Similarity 與 Feature Extraction / Embedding，文字 AI 實驗室擴充為十二類。
 - 2026-08-30：品牌前台移至 `web/`，根首頁改為各子系統清單入口。
