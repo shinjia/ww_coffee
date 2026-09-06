@@ -93,7 +93,7 @@
 
 ## 使用方式
 
-1. 由 HTTP 伺服器開啟 `http://localhost/ww_coffee/lab_hugging/`。
+1. 由 HTTP 伺服器開啟 `http://localhost/<專案目錄>/lab_hugging/`。
 2. 從入口選擇一個獨立實驗。
 3. 按「載入模型」，等待進度顯示完成。
 4. 填寫該任務專用輸入，再執行 AI。

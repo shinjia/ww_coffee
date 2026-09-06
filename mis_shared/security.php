@@ -9,7 +9,24 @@ function mis_e($value): string
 function mis_base_url(string $path = ''): string
 {
     $config = mis_load_config();
-    $base = rtrim(isset($config['base_path']) ? (string) $config['base_path'] : '', '/');
+    $configuredBase = isset($config['base_path']) ? trim((string) $config['base_path']) : 'auto';
+    if ($configuredBase !== '' && strtolower($configuredBase) !== 'auto') {
+        $base = rtrim('/' . trim($configuredBase, '/'), '/');
+    } else {
+        $scriptName = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', (string) $_SERVER['SCRIPT_NAME']) : '';
+        $base = '';
+        $moduleMarkers = array('/mis_shared/', '/mis_hr/', '/mis_feedback/', '/mis_shop/', '/web/', '/lab_hugging/', '/lab_hugging_python/');
+        $positions = array();
+        foreach ($moduleMarkers as $marker) {
+            $position = strpos($scriptName, $marker);
+            if ($position !== false) {
+                $positions[] = $position;
+            }
+        }
+        if ($positions) {
+            $base = rtrim(substr($scriptName, 0, min($positions)), '/');
+        }
+    }
     return $base . '/' . ltrim($path, '/');
 }
 

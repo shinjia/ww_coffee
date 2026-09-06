@@ -17,7 +17,7 @@
 
 ## 開發帳號規則
 
-管理者 `admin/admin1234`；測試員工 `employee/employee1234`。新增帳號的初始密碼為「帳號＋1234」，只保存 `password_hash()` 產生的雜湊。此規則只允許在 development 環境使用。
+管理者 `admin/admin123`；測試員工 `employee/employee123`。新增及虛擬員工的密碼固定為「帳號＋123」，只保存 `password_hash()` 產生的雜湊。此規則只允許在 development 環境使用。
 
 ## 目前功能與限制
 

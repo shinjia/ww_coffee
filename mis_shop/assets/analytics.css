@@ -1,0 +1,5 @@
+.analytics-bars { display: grid; gap: 12px; }
+.analytics-bar { display: grid; grid-template-columns: minmax(110px, 1fr) minmax(180px, 3fr) minmax(120px, auto); gap: 12px; align-items: center; }
+.analytics-bar > div { overflow: hidden; height: 12px; border-radius: 999px; background: #e4e1d8; }
+.analytics-bar i { display: block; height: 100%; border-radius: inherit; background: #3f5848; }
+@media (max-width: 620px) { .analytics-bar { grid-template-columns: 1fr auto; } .analytics-bar > div { grid-column: 1 / -1; grid-row: 2; } }

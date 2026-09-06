@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo = mis_db();
         $pdo->beginTransaction();
         $now = date('Y-m-d H:i:s');
-        $password = $username . '1234';
+        $password = $username . '123';
         $userStmt = $pdo->prepare('INSERT INTO users (username, password_hash, display_name, role, active, created_at, updated_at) VALUES (:username, :password_hash, :display_name, :role, 1, :created_at, :updated_at)');
         $userStmt->execute(array(':username' => $username, ':password_hash' => password_hash($password, PASSWORD_DEFAULT), ':display_name' => $name, ':role' => $role, ':created_at' => $now, ':updated_at' => $now));
         $userId = (int) $pdo->lastInsertId();
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $employeeStmt->execute(array(':user_id' => $userId, ':employee_no' => $employeeNo, ':name' => $name, ':department' => $department, ':title' => $title, ':email' => $email, ':created_at' => $now, ':updated_at' => $now));
         $pdo->commit();
         mis_audit('employee_created', 'employee', (string) $pdo->lastInsertId(), array('employee_no' => $employeeNo, 'username' => $username, 'role' => $role));
-        mis_flash('success', '員工已新增。開發初始密碼為「' . $username . '1234」。');
+        mis_flash('success', '員工已新增。開發密碼為「' . $username . '123」。');
         header('Location: ' . mis_base_url('mis_hr/'));
         exit;
     } catch (PDOException $exception) {
@@ -70,7 +70,7 @@ mis_render_header('新增員工', 'hr');
       <label class="field">部門<input name="department" maxlength="60" required value="<?= mis_e(isset($_POST['department']) ? $_POST['department'] : '') ?>"></label>
       <label class="field">職稱<input name="title" maxlength="60" required value="<?= mis_e(isset($_POST['title']) ? $_POST['title'] : '') ?>"></label>
       <label class="field">Email（選填）<input name="email" type="email" maxlength="254" value="<?= mis_e(isset($_POST['email']) ? $_POST['email'] : '') ?>"></label>
-      <label class="field">登入帳號<input name="username" maxlength="50" pattern="[a-z0-9._-]+" required value="<?= mis_e(isset($_POST['username']) ? $_POST['username'] : '') ?>"><small>開發初始密碼為帳號加 1234。</small></label>
+      <label class="field">登入帳號<input name="username" maxlength="50" pattern="[a-z0-9._-]+" required value="<?= mis_e(isset($_POST['username']) ? $_POST['username'] : '') ?>"><small>development 密碼固定為帳號加 123。</small></label>
       <label class="field">角色<select name="role"><option value="employee">員工</option><option value="admin">管理者</option></select></label>
       <div class="span-2"><button class="primary-button" type="submit">建立員工與帳號</button></div>
     </form>

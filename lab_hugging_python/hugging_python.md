@@ -14,7 +14,7 @@ C:\Path\To\Python311\python.exe -m venv .venv
 .\.venv\Scripts\python.exe api\app.py
 ```
 
-開啟 `http://localhost/ww_coffee/lab_hugging_python/`。API 位於 `http://127.0.0.1:5000/api/v1`，健康檢查為 `/health`。首次模型下載需要網路，快取放在 `api/storage/models/`。
+開啟 `http://localhost/<專案目錄>/lab_hugging_python/`。API 位於 `http://127.0.0.1:5000/api/v1`，健康檢查為 `/health`。首次模型下載需要網路，快取放在 `api/storage/models/`。
 
 ## 任務
 

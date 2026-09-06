@@ -50,4 +50,6 @@ require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/layout.php';
 
+header('Link: <' . mis_base_url('web/assets/images/ww-coffee-hero.webp') . '>; rel="icon"');
+
 mis_enforce_session_timeout();

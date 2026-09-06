@@ -49,7 +49,7 @@ mis_render_header('員工登入');
       <button class="primary-button" type="submit">登入</button>
     </form>
     <?php if (mis_load_config()['environment'] === 'development'): ?>
-      <aside class="dev-note"><strong>開發測試帳號</strong><br>管理者：admin / admin1234<br>員工：employee / employee1234</aside>
+      <aside class="dev-note"><strong>開發測試帳號</strong><br>管理者：admin / admin123<br>員工：employee / employee123</aside>
     <?php endif; ?>
   </section>
 </main>

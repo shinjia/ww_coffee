@@ -1,0 +1,23 @@
+.shop-hero > * {
+  min-width: 0;
+}
+
+.qr-card img,
+.qr-card canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.qr-card a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  .shop-hero h1 {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
